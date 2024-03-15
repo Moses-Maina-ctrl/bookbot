@@ -5,8 +5,7 @@ def main():
         number_of_words = count_words(words)
         letter_count =count_letters(words)
         sorted_letters = sort_letter(letter_count)
-        print(sorted_letters)
-    # print_report(number_of_words, letter_count)
+        print_report(number_of_words, sorted_letters)
 
 def count_words(words):
     number_of_words = len(words)
@@ -26,12 +25,11 @@ def count_letters(words):
                 letter_count[letter]= 1
     return letter_count
 
-def print_report(words, letters):
-    print("--- Begin report of books/frankenstein.txt ---")
-    print(f"{words} words found in the document")
-    for letter in letters:
-        print(f"The \'{letter}\' was found {letters[letter]} times")
+# Find the key to sort the letters with
+def sort_on(dict):
+    return dict["number"]
 
+# Sort the letters, first by breaking dictionary to list with individual dict
 def sort_letter(letters):
     letters_to_sort=[]
     for letter in letters:
@@ -39,6 +37,14 @@ def sort_letter(letters):
         dict["letter"] = letter
         dict["number"] = letters[letter]
         letters_to_sort.append(dict)
+    letters_to_sort.sort(reverse=True, key=sort_on)
     return letters_to_sort
+
+
+def print_report(words, letters):
+    print("--- Begin report of books/frankenstein.txt ---")
+    print(f"{words} words found in the document")
+    for letter in letters:
+        print(f"The \'{letter["letter"]}\' was found {letter["number"]} times")
 
 main()
