@@ -4,7 +4,9 @@ def main():
         words = file_contents.split()
         number_of_words = count_words(words)
         letter_count =count_letters(words)
-        print_report(number_of_words, letter_count)
+        sorted_letters = sort_letter(letter_count)
+        print(sorted_letters)
+    # print_report(number_of_words, letter_count)
 
 def count_words(words):
     number_of_words = len(words)
@@ -29,4 +31,14 @@ def print_report(words, letters):
     print(f"{words} words found in the document")
     for letter in letters:
         print(f"The \'{letter}\' was found {letters[letter]} times")
+
+def sort_letter(letters):
+    letters_to_sort=[]
+    for letter in letters:
+        dict={}
+        dict["letter"] = letter
+        dict["number"] = letters[letter]
+        letters_to_sort.append(dict)
+    return letters_to_sort
+
 main()
